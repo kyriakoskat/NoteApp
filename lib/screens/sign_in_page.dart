@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'home_page.dart'; // Κάνε import της HomePage
 
 class SignInPage extends StatefulWidget {
   @override
@@ -30,6 +31,7 @@ class _SignInPageState extends State<SignInPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Εικόνα
               Center(
                 child: Image.asset(
                   'assets/images/notebook.png',
@@ -39,15 +41,20 @@ class _SignInPageState extends State<SignInPage> {
                 ),
               ),
               SizedBox(height: 32),
+
+              // Τίτλος
               Text(
                 "Sign in",
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 24),
+
+              // Φόρμα
               Form(
                 key: _formKey,
                 child: Column(
                   children: [
+                    // Email Input
                     TextFormField(
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
@@ -58,16 +65,13 @@ class _SignInPageState extends State<SignInPage> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your email address';
-                        }
-                        return null;
-                      },
                     ),
                     SizedBox(height: 16),
+
+                    // Password Input
                     TextFormField(
                       controller: _passwordController,
                       obscureText: true,
@@ -78,30 +82,28 @@ class _SignInPageState extends State<SignInPage> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your password';
-                        }
-                        return null;
-                      },
                     ),
                   ],
                 ),
               ),
               SizedBox(height: 24),
+
+              // Sign In Button
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      // Handle sign-in logic
-                      // Navigator.pushReplacementNamed(context, '/home');
-                    }
+                    // Πλοήγηση στη HomePage χωρίς έλεγχο email και password
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryColor, // Αντικατάσταση primary με backgroundColor
+                    backgroundColor: primaryColor,
                     padding: EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -109,11 +111,17 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                   child: Text(
                     "Sign in",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
               SizedBox(height: 24),
+
+              // Terms and Conditions
               Text(
                 "By creating an account or signing in you agree to our Terms and Conditions",
                 style: TextStyle(fontSize: 12, color: Colors.grey[700]),
